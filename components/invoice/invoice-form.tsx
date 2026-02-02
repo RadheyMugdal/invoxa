@@ -9,6 +9,7 @@ import {
 } from "@/types/invoice"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { PhoneInput } from "@/components/ui/phone-input"
 import {
   Select,
   SelectContent,
@@ -26,6 +27,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { LineItemsEditor } from "./line-items-editor"
 import { CURRENCY_OPTIONS } from "@/lib/currency-options"
 import { IconHash, IconUser, IconBuilding, IconList, IconCalculator, IconFileText } from "@tabler/icons-react"
+import { DatePicker } from "@/components/ui/date-picker"
 
 interface InvoiceFormProps {
   invoice: InvoiceData
@@ -70,24 +72,22 @@ export function InvoiceForm({ invoice, onChange }: InvoiceFormProps) {
                 placeholder="INV-001"
               />
             </Field>
-            <Field orientation="responsive">
-              <FieldLabel htmlFor="invoiceDate">Invoice Date</FieldLabel>
-              <Input
-                id="invoiceDate"
-                type="date"
-                value={invoice.invoiceDate}
-                onChange={(e) => updateField("invoiceDate", e.target.value)}
-              />
-            </Field>
-            <Field orientation="responsive">
-              <FieldLabel htmlFor="dueDate">Due Date</FieldLabel>
-              <Input
-                id="dueDate"
-                type="date"
-                value={invoice.dueDate}
-                onChange={(e) => updateField("dueDate", e.target.value)}
-              />
-            </Field>
+            <DatePicker
+              id="invoiceDate"
+              label="Invoice Date"
+              value={invoice.invoiceDate}
+              onChange={(date) => updateField("invoiceDate", date)}
+              placeholder="Select invoice date"
+              orientation="responsive"
+            />
+            <DatePicker
+              id="dueDate"
+              label="Due Date"
+              value={invoice.dueDate}
+              onChange={(date) => updateField("dueDate", date)}
+              placeholder="Select due date"
+              orientation="responsive"
+            />
             <Field orientation="responsive">
               <FieldLabel htmlFor="currency">Currency</FieldLabel>
               <Select
@@ -141,12 +141,13 @@ export function InvoiceForm({ invoice, onChange }: InvoiceFormProps) {
             </Field>
             <Field orientation="responsive">
               <FieldLabel htmlFor="senderPhone">Phone</FieldLabel>
-              <Input
+              <PhoneInput
                 id="senderPhone"
-                type="tel"
+                defaultCountry="IN"
                 value={invoice.sender.phone}
-                onChange={(e) => updateSender("phone", e.target.value)}
-                placeholder="+1 234 567 890"
+                onChange={(value) => updateSender("phone", value)}
+                placeholder="234 567 890"
+                className="w-full"
               />
             </Field>
             <Field>
@@ -194,12 +195,13 @@ export function InvoiceForm({ invoice, onChange }: InvoiceFormProps) {
             </Field>
             <Field orientation="responsive">
               <FieldLabel htmlFor="clientPhone">Phone</FieldLabel>
-              <Input
+              <PhoneInput
                 id="clientPhone"
-                type="tel"
+                defaultCountry="IN"
                 value={invoice.client.phone}
-                onChange={(e) => updateClient("phone", e.target.value)}
+                onChange={(value) => updateClient("phone", value)}
                 placeholder="+1 234 567 890"
+                className="w-full"
               />
             </Field>
             <Field>

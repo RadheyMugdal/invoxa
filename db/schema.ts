@@ -34,9 +34,8 @@ export const session = pgTable(
 );
 
 export const account = pgTable(
-  "account",
-  {
-    id: text("id").primaryKey(),
+  "account",(t)=>({
+    id: text('id').primaryKey(),
     accountId: text("account_id").notNull(),
     providerId: text("provider_id").notNull(),
     userId: text("user_id")
@@ -53,25 +52,26 @@ export const account = pgTable(
     updatedAt: timestamp("updated_at")
       .$onUpdate(() => /* @__PURE__ */ new Date())
       .notNull(),
-  },
+  }),
   (table) => [index("account_userId_idx").on(table.userId)],
 );
 
 export const verification = pgTable(
   "verification",
-  {
-    id: text("id").primaryKey(),
+  (t) => ({
+    id: text("id").primaryKey(), 
     identifier: text("identifier").notNull(),
     value: text("value").notNull(),
     expiresAt: timestamp("expires_at").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(() => new Date())
       .notNull(),
-  },
+  }),
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
+
 
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
@@ -95,11 +95,13 @@ export const accountRelations = relations(account, ({ one }) => ({
 // Invoice tables
 export const invoice = pgTable(
   "invoice",
-  {
-    id: text("id").primaryKey(),
+  (t)=>(
+    {
+    id: t.uuid("id").defaultRandom().primaryKey(),
     userId: text("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
+    invoiceName: text("invoice_name").notNull().default("Untitled Invoice"),
     invoiceNumber: text("invoice_number").notNull().unique(),
     invoiceDate: timestamp("invoice_date").notNull(),
     dueDate: timestamp("due_date").notNull(),
@@ -131,7 +133,8 @@ export const invoice = pgTable(
     updatedAt: timestamp("updated_at")
       .$onUpdate(() => /* @__PURE__ */ new Date())
       .notNull(),
-  },
+  }
+  ),
   (table) => [
     index("invoice_userId_idx").on(table.userId),
     index("invoice_invoiceNumber_idx").on(table.invoiceNumber),
@@ -140,9 +143,10 @@ export const invoice = pgTable(
 
 export const lineItem = pgTable(
   "line_item",
-  {
-    id: text("id").primaryKey(),
-    invoiceId: text("invoice_id")
+  (t)=>(
+    {
+    id: t.uuid("id").defaultRandom().primaryKey(),
+    invoiceId: t.uuid("id")
       .notNull()
       .references(() => invoice.id, { onDelete: "cascade" }),
     description: text("description").notNull(),
@@ -150,7 +154,8 @@ export const lineItem = pgTable(
     rate: numeric("rate", { precision: 12, scale: 2 }).notNull(),
     amount: numeric("amount", { precision: 12, scale: 2 }).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
-  },
+  }
+  ),
   (table) => [index("line_item_invoiceId_idx").on(table.invoiceId)]
 );
 

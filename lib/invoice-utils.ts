@@ -54,16 +54,16 @@ export function formatCurrency(amount: number, currency: CurrencyCode): string {
 /**
  * Format date for display
  */
-export function formatDate(dateString: string): string {
+export function formatDate(date: Date | string): string {
   try {
-    const date = new Date(dateString)
+    const dateObj = typeof date === 'string' ? new Date(date) : date
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }).format(date)
+    }).format(dateObj)
   } catch {
-    return dateString
+    return ""
   }
 }
 

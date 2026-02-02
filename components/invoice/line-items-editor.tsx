@@ -94,7 +94,7 @@ export function LineItemsEditor({ lineItems, currency, onChange }: LineItemsEdit
                 <Input
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="1"
                   placeholder="1"
                   value={item.quantity === 0 ? "" : item.quantity}
                   onChange={(e) => updateLineItem(item.id, "quantity", parseFloat(e.target.value) || 0)}
