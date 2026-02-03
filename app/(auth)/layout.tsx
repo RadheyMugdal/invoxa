@@ -1,4 +1,14 @@
 import React from 'react'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Authentication",
+  description: "Sign in or create an account to start creating professional invoices with Invoxa",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const AuthLayout = ({children}:{children:React.ReactNode}) => {
   return (

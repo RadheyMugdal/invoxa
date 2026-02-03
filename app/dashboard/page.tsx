@@ -13,6 +13,12 @@ import {
 } from "@/components/ui/sidebar";
 import { RecentInvoicesTable } from "@/components/invoice/recent-invoices-table";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "View and manage your recent invoices from your Invoxa dashboard",
+};
 
 export default function Page() {
   return (

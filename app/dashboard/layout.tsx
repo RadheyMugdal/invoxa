@@ -6,6 +6,16 @@ import { authClient } from '@/lib/auth-client'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Manage your invoices and clients from your Invoxa dashboard",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const DashboardLayout =async  ({children}:{children:React.ReactNode}) => {
     const session =await auth.api.getSession({

@@ -1,4 +1,3 @@
-import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,12 +8,16 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  SidebarInset,
-  SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { InvoiceGenerator } from "@/components/invoice/invoice-generator";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit Invoice",
+  description: "Edit and update your existing invoice details",
+};
 
 export default function EditInvoicePage() {
   return (
