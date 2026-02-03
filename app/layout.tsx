@@ -30,6 +30,17 @@ export const metadata: Metadata = {
   authors: [{ name: "Invoxa" }],
   creator: "Invoxa",
   publisher: "Invoxa",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' }
+    ],
+  },
+  manifest: '/site.webmanifest',
   formatDetection: {
     email: false,
     address: false,
