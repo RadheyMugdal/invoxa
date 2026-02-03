@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
+import { motion } from 'framer-motion'
 
 const FAQ = () => {
-
   const faqs = [
     {
       question: 'Is Invoxa really free to use?',
@@ -32,33 +32,72 @@ const FAQ = () => {
     }
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  }
+
   return (
-    <div className='w-full border-b '>
+    <div className='w-full border-b'>
       <div className='max-w-4xl mx-auto space-y-12 border-x py-16 sm:py-24 px-4 sm:px-8'>
-        <div className='space-y-3 sm:space-y-4 flex flex-col text-center'>
-          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-pretty '>
+        <motion.div
+          className='space-y-3 sm:space-y-4 flex flex-col text-center'
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl text-pretty'>
             Frequently Asked Questions
           </h2>
-          <p className='text-sm sm:text-base max-w-3xl text-balance mx-auto'>
+          <motion.p
+            className='text-sm sm:text-base max-w-3xl text-balance mx-auto'
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Everything you need to know about Invoxa. Can't find what you're looking for? Contact our support team.
-          </p>
-        </div>
-<Accordion type='single' collapsible>
+          </motion.p>
+        </motion.div>
 
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className='text-sm sm:text-base text-primary/90'>
-  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className=' text-xs sm:text-sm'>
-                {faq.answer}
-                </AccordionContent>
-            </AccordionItem>
-
-          ))}
-
-
-</Accordion>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          <Accordion type='single' collapsible>
+            {faqs.map((faq, index) => (
+              <motion.div key={index} variants={itemVariants}>
+                <AccordionItem value={`item-${index}`}>
+                  <AccordionTrigger className='text-sm sm:text-base text-primary/90'>
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className='text-xs sm:text-sm'>
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
+            ))}
+          </Accordion>
+        </motion.div>
       </div>
     </div>
   )

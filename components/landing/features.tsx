@@ -706,8 +706,8 @@ const Features = () => {
             <motion.div
                 ref={ref}
                 className={`grid grid-cols-1 md:grid-cols-2 ${index === 0 && 'border-t'}`}
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6 }}
             >
                 {/* Content Column */}
@@ -717,46 +717,55 @@ const Features = () => {
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -30 : 30 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    <div className='space-y-2'>
-                        <motion.h1
-                            className='text-2xl sm:text-3xl'
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                            transition={{ delay: 0.3 }}
-                        >
+                    <motion.div
+                        className='space-y-2'
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                    >
+                        <h1 className='text-2xl sm:text-3xl'>
                             {feature.title}
-                        </motion.h1>
+                        </h1>
                         <motion.p
                             className='text-sm sm:text-base text-primary/75'
                             initial={{ opacity: 0 }}
                             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                            transition={{ delay: 0.4 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
                         >
                             {feature.description}
                         </motion.p>
-                    </div>
-                    <div>
-                        <ul className='space-y-2'>
-                            {feature.items.map((item, itemIndex) => (
-                                <motion.li
-                                    key={itemIndex}
-                                    className='flex text-xs sm:text-sm items-center text-primary gap-2'
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                                    transition={{ delay: 0.5 + itemIndex * 0.1 }}
-                                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                    </motion.div>
+                    <motion.ul
+                        className='space-y-2'
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
+                        {feature.items.map((item, itemIndex) => (
+                            <motion.li
+                                key={itemIndex}
+                                className='flex text-xs sm:text-sm items-center text-primary gap-2'
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                                transition={{ duration: 0.4, delay: 0.5 + itemIndex * 0.1 }}
+                                whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                            >
+                                <motion.div
+                                    whileHover={{ scale: 1.2, rotate: 5 }}
+                                    transition={{ type: 'spring', stiffness: 400 }}
+                                    className="flex"
                                 >
-                                    <motion.div
-                                        whileHover={{ scale: 1.2, rotate: 5 }}
-                                        transition={{ type: 'spring', stiffness: 400 }}
-                                    >
-                                        <item.icon size={16} className="sm:size-[18px]" />
-                                    </motion.div>
-                                    {item.text}
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
+                                    <div className="sm:hidden">
+                                        <item.icon size={16} />
+                                    </div>
+                                    <div className="hidden sm:block">
+                                        <item.icon size={18} />
+                                    </div>
+                                </motion.div>
+                                {item.text}
+                            </motion.li>
+                        ))}
+                    </motion.ul>
                 </motion.div>
 
                 {/* Animation Column */}
@@ -779,22 +788,25 @@ const Features = () => {
                 <motion.div
                     className='space-y-3 sm:space-y-4 flex flex-col text-center px-4 sm:px-8'
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.6 }}
                 >
                     <motion.h2
                         className='text-3xl sm:text-4xl lg:text-5xl text-pretty'
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
                     >
                         Everything you need to invoice smarter
                     </motion.h2>
                     <motion.p
                         className='text-sm sm:text-base max-w-3xl text-balance mx-auto'
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
                     >
                         Create, send, and manage invoices from one simple dashboard.
                     </motion.p>
