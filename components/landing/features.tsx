@@ -712,9 +712,9 @@ const Features = () => {
             >
                 {/* Content Column */}
                 <motion.div
-                    className={`py-8 sm:py-12 space-y-3 sm:space-y-4 px-4 sm:px-8 ${isEven ? '' : 'order-2'} ${isEven ? 'md:border-r' : 'md:order-2 md:border-l'}`}
-                    initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -30 : 30 }}
+                    className={`py-8 sm:py-12 space-y-3 sm:space-y-4 px-4 sm:px-8 ${isEven ? 'md:border-r' : 'order-2 md:border-l'}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
                     <motion.div
@@ -771,9 +771,9 @@ const Features = () => {
                 {/* Animation Column */}
                 <motion.div
                     className={`bg-gradient-to-br from-gray-50 to-gray-100 ${isEven ? '' : 'order-1 md:order-1'} relative overflow-hidden min-h-[300px]`}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
                     whileHover={{ backgroundColor: 'rgb(249, 250, 251)' }}
                 >
                     {isInView && <AnimationComponent />}
