@@ -48,9 +48,9 @@ const Hero = () => {
         </div>
 
         <motion.div
-          className='w-full bg-secondary rounded-lg relative p-4 sm:p-8 bg-[repeating-linear-gradient(45deg,#e5e7eb_0,#e5e7eb_1px,transparent_1px,transparent_6px)] overflow-hidden'
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className='w-full bg-secondary rounded-lg relative p-4 sm:p-8 bg-[repeating-linear-gradient(45deg,#e5e7eb_0,#e5e7eb_1px,transparent_1px,transparent_6px)] dark:bg-[repeating-linear-gradient(45deg,#374151_0,#374151_1px,transparent_1px,transparent_6px)] overflow-hidden'
+          initial={{ opacity: 0,y: 30 }}
+          animate={{ opacity: 1,  y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
         >
           <div className='w-full rounded-t-lg px-2 flex gap-3 sm:gap-4 bg-background border-b'>

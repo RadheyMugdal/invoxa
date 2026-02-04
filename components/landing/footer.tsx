@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconBrandTwitter, IconBrandGithub, IconBrandLinkedin, IconMail } from '@tabler/icons-react'
+import { ModeToggle } from '../ui/mode-toggle'
 
 const Footer = () => {
   const productLinks = [
@@ -130,6 +131,7 @@ const Footer = () => {
             </p>
 
             <div className='flex items-center gap-3 sm:gap-4'>
+              <ModeToggle />
               {socialLinks.map((social) => {
                 const Icon = social.icon
                 return (

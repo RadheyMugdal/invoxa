@@ -52,29 +52,14 @@ const CTA = () => {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
+           
               <Link href={"/sign-up"}>
                 <Button size={"lg"} variant={"secondary"} className="w-full sm:w-auto">
                   Start Free Trial
                   <IconArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <Link href={"/sign-up"}>
-                <Button size={"lg"} variant="outline" className="w-full sm:w-auto">
-                  View Demo
-                </Button>
-              </Link>
-            </motion.div>
+           
           </motion.div>
         </div>
       </motion.div>

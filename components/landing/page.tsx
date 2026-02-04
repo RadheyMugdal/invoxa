@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button } from '../ui/button'
+import { ModeToggle } from '../ui/mode-toggle'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
@@ -24,10 +25,12 @@ const Navbar = () => {
           Invoxa
         </motion.h1>
         <motion.div
+          className="flex items-center gap-2 sm:gap-4"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
+          <ModeToggle />
           <Link href={"/sign-up"}>
             <Button size={"lg"} className="sm:size-lg">
               Get started
