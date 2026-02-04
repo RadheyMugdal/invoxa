@@ -26,8 +26,8 @@ export const invoice = pgTable("invoice", {
 	taxAmount: numeric("tax_amount", { precision: 12, scale:  2 }).default('0').notNull(),
 	discountAmount: numeric("discount_amount", { precision: 12, scale:  2 }).default('0').notNull(),
 	total: numeric({ precision: 12, scale:  2 }).default('0').notNull(),
-	notes: text().default('),
-	paymentInstructions: text("payment_instructions").default('),
+	notes: text().default(''),
+	paymentInstructions: text("payment_instructions").default(''),
 	createdAt: timestamp("created_at", { mode: 'string' }).defaultNow().notNull(),
 	updatedAt: timestamp("updated_at", { mode: 'string' }).notNull(),
 }, (table) => [

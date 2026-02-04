@@ -1,6 +1,6 @@
-import { Document, Page, Text, View, Table, TableCell, TableRow, StyleSheet } from "@react-pdf/renderer"
-import { type InvoiceData } from "@/types/invoice"
-import { calculateTotals, formatCurrency, type CurrencyCode } from "@/lib/invoice-utils"
+import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer"
+import { CurrencyCode, type InvoiceData } from "@/types/invoice"
+import { calculateTotals, formatCurrency } from "@/lib/invoice-utils"
 
 interface InvoicePDFProps {
   invoice: InvoiceData
