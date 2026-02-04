@@ -56,7 +56,7 @@ export default function SignInPage() {
   return (
     <div className="min-h-screen flex items-center relative justify-center  p-4">
      
-      <Card className="w-full max-w-sm  ring-0">
+      <Card className="w-full max-w-sm bg-transparent  ring-0">
         <CardHeader className="space-y-1 flex flex-col items-center">
            
           <CardTitle className="text-2xl">Welcome back</CardTitle>
@@ -131,7 +131,7 @@ export default function SignInPage() {
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className=" underline text-blue-600  hover:text-blue-900">
+            <Link href="/sign-up" className=" underline text-blue-400  hover:text-blue-500">
               Sign up
             </Link>
           </p>

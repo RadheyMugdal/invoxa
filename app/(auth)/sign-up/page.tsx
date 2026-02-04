@@ -67,7 +67,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4">
        
-      <Card className="w-full max-w-sm ring-0 ">
+      <Card className="w-full max-w-sm bg-transparent ring-0 ">
         <CardHeader className="space-y-1 flex flex-col items-center">
           <CardTitle className="text-2xl ">Create an account</CardTitle>
           <CardDescription>
@@ -153,7 +153,7 @@ export default function SignUpPage() {
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/sign-in" className="  underline text-blue-600  hover:text-blue-900">
+            <Link href="/sign-in" className="  underline text-blue-400  hover:text-blue-500">
               Sign in
             </Link>
           </p>
