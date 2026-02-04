@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
+import { IconMoon, IconSun } from "@tabler/icons-react"
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()
@@ -25,10 +25,10 @@ export function ModeToggle() {
       size="icon"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      <SunIcon
+      <IconSun
         className="h-6 w-[1.3rem] dark:hidden"
       />
-      <MoonIcon
+      <IconMoon
         className="hidden h-6 w-[1.3rem] dark:block"
       />
       <span className="sr-only">Toggle theme</span>
