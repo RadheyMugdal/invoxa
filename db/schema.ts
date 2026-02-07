@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index, numeric } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, index, numeric, uuid } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -76,6 +76,7 @@ export const verification = pgTable(
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  createdShares: many(invoiceShare),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -159,6 +160,29 @@ export const lineItem = pgTable(
   (table) => [index("line_item_invoiceId_idx").on(table.invoiceId)]
 );
 
+export const invoiceShare = pgTable(
+  "invoice_share",
+  (t) => ({
+    id: t.uuid("id").defaultRandom().primaryKey(),
+    invoiceId: t.uuid("invoice_id")
+      .notNull()
+      .references(() => invoice.id, { onDelete: "cascade" }),
+    shareToken: t.text("share_token").notNull().unique(),
+    createdBy: t.text("created_by")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    isActive: t.boolean("is_active").notNull().default(true),
+    createdAt: t.timestamp("created_at").defaultNow().notNull(),
+    lastViewedAt: t.timestamp("last_viewed_at"),
+    viewCount: t.integer("view_count").notNull().default(0),
+  }),
+  (table) => [
+    index("invoice_share_invoice_id_idx").on(table.invoiceId),
+    index("invoice_share_share_token_idx").on(table.shareToken),
+    index("invoice_share_created_by_idx").on(table.createdBy),
+  ]
+);
+
 // Relations
 export const invoiceRelations = relations(invoice, ({ one, many }) => ({
   user: one(user, {
@@ -166,11 +190,23 @@ export const invoiceRelations = relations(invoice, ({ one, many }) => ({
     references: [user.id],
   }),
   lineItems: many(lineItem),
+  shares: many(invoiceShare),
 }));
 
 export const lineItemRelations = relations(lineItem, ({ one }) => ({
   invoice: one(invoice, {
     fields: [lineItem.invoiceId],
     references: [invoice.id],
+  }),
+}));
+
+export const invoiceShareRelations = relations(invoiceShare, ({ one }) => ({
+  invoice: one(invoice, {
+    fields: [invoiceShare.invoiceId],
+    references: [invoice.id],
+  }),
+  creator: one(user, {
+    fields: [invoiceShare.createdBy],
+    references: [user.id],
   }),
 }));

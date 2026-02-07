@@ -49,8 +49,13 @@ export function InvoiceActions({
 
   return (
     <div className="flex items-center gap-2">
-      <Button variant="outline" onClick={handlePrint} data-icon="inline-start">
-        <IconPrinter /> Print
+       {onReset && (
+        <Button variant="outline" size={"icon"} onClick={onReset} data-icon="inline-start">
+          <IconRefresh />
+        </Button>
+      )}
+      <Button variant="outline" size={"icon"} onClick={handlePrint} data-icon="inline-start">
+        <IconPrinter /> 
       </Button>
       <Button onClick={handleDownloadPDF} data-icon="inline-start">
         <IconDownload /> Download PDF
@@ -70,11 +75,7 @@ export function InvoiceActions({
               : "Save Invoice"}
         </Button>
       )}
-      {onReset && (
-        <Button variant="ghost" onClick={onReset} data-icon="inline-start">
-          <IconRefresh /> Reset
-        </Button>
-      )}
+     
     </div>
   );
 }

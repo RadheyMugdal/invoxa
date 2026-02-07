@@ -16,6 +16,7 @@ import type { CurrencyCode } from "@/types/invoice"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { downloadAsPDF } from "@/lib/pdf-generator"
+import { ShareMenuItem } from "./share-menu-item"
 
 // This type is based on the invoice schema returned from the API
 export type InvoiceTableRow = {
@@ -190,6 +191,7 @@ export function createInvoiceColumns({ onDelete }: InvoiceColumnsProps): ColumnD
                 <IconEdit className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
+              <ShareMenuItem invoiceId={invoice.id} />
               <DropdownMenuItem onClick={() => handleDownload(invoice)}>
                 <IconDownload className="mr-2 h-4 w-4" />
                 Download

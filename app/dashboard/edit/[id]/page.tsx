@@ -11,6 +11,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { InvoiceGenerator } from "@/components/invoice/invoice-generator";
+import { ShareManagerContent } from "@/components/invoice/share-manager-content";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import type { Metadata } from "next";
 
@@ -47,6 +48,11 @@ export default function EditInvoicePage() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <InvoiceGenerator editMode={true} />
-        </div></>
+          <div className="border rounded-lg p-6">
+            <h2 className="text-lg font-semibold mb-4">Shared Links</h2>
+            <ShareManagerContent />
+          </div>
+        </div>
+  </>
   );
 }

@@ -6,6 +6,7 @@ import { type InvoiceData } from "@/types/invoice";
 import { InvoiceForm } from "./invoice-form";
 import { InvoicePreview } from "./invoice-preview";
 import { InvoiceActions } from "./invoice-actions";
+import { ShareInvoiceButton } from "./share-invoice-button";
 import {
   generateInvoiceNumber,
   getTodayDate,
@@ -224,8 +225,12 @@ export function InvoiceGenerator({ editMode = false }: InvoiceGeneratorProps) {
                   className="font-semibold text-xl bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary rounded px-2 py-1"
                   placeholder="Invoice Name"
                 />
+
               </div>
             </div>
+            <div className=" flex items-center gap-2">
+            {editMode && invoiceId && <ShareInvoiceButton invoiceId={invoiceId} />}
+
             <InvoiceActions
               invoice={invoice}
               onReset={handleReset}
@@ -233,6 +238,8 @@ export function InvoiceGenerator({ editMode = false }: InvoiceGeneratorProps) {
               isSaving={isSaving}
               editMode={editMode}
             />
+
+            </div>
           </div>
         </div>
       </header>
